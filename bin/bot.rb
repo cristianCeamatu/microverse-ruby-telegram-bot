@@ -1,4 +1,4 @@
-#!/usr/bin/env ruby # rubocop:disable Lint/ScriptPermission, Lint/RedundantCopDisableDirective
+#!/usr/bin/env ruby
 
 require 'colorize'
 require 'telegram/bot'
