@@ -21,7 +21,7 @@ Dotenv.load
 Telegram::Bot::Client.run(ENV['TELEGRAM_BOT_API'], logger: Logger.new($stderr)) do |bot|
   bot.logger.info('Bot has been started, you can check it at the link:' << ' https://t.me/rock_paper_scissors2020_bot'.yellow.bold)
   # Print a nice an funny message (maybe with a Gif) that we can find anything: Have questions? I have the answeres!
-  #I am the Search Bot! Don`t know what to search? Type /random to get a random Wikipedia link
+  # I am the Search Bot! Don`t know what to search? Type /random to get a random Wikipedia link
   bot.listen do |message|
     # Accepts both inline messages and direct chat, has the same response in both cases
     #   start a case for the message text:
@@ -41,7 +41,7 @@ Telegram::Bot::Client.run(ENV['TELEGRAM_BOT_API'], logger: Logger.new($stderr)) 
     #     Send the result
     #   else
     #     return a funny error message (maybe a GIF)
-    # asking to use only the available commands and run 
+    # asking to use only the available commands and run
     # help to see all available
     #     print the command that the User entered
     # future improvements, search synonims API for searching synonims and search google API for searching anything
