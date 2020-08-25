@@ -4,24 +4,24 @@ require 'telegram/bot'
 require 'dotenv'
 Dotenv.load
 
-# Prerequisites 
+# Prerequisites
 #   ADD Wikipedia URL to the Environments
-#   Wikipedia Module
 #     Search Class
-#       - loading_message(query)
-#     Random Class
-#       - loading_message()
-#     Utils module
 #       - check_query(query)
-#       - get_results(query = nul)
+#     Random Class
+#     Utils module
+#       - uri(url, query = nil)
+#       - loading_message(query = nil)
 #       - result.to_markdown
-#       - query_error
+#       - counter(seconds)
+#       - get_results(uri)
 
 # p 'The ruby bot has started, you can check it at the link: https://t.me/rock_paper_scissors2020_bot'
 
 Telegram::Bot::Client.run(ENV['TELEGRAM_BOT_API'], logger: Logger.new($stderr)) do |bot|
   bot.logger.info('Bot has been started, you can check it at the link:' << ' https://t.me/rock_paper_scissors2020_bot'.yellow.bold)
-  # Print a nice an funny message (maybe with a Gif) that we can find anything: Have questions? I have the answeres! I am the Search Bot! Don`t know what to search? Type /random to get a random Wikipedia link
+  # Print a nice an funny message (maybe with a Gif) that we can find anything: Have questions? I have the answeres!
+  #I am the Search Bot! Don`t know what to search? Type /random to get a random Wikipedia link
   bot.listen do |message|
     # Accepts both inline messages and direct chat, has the same response in both cases
     #   start a case for the message text:
@@ -39,12 +39,24 @@ Telegram::Bot::Client.run(ENV['TELEGRAM_BOT_API'], logger: Logger.new($stderr)) 
     #     Request 5-10 results from Wikipedia as JSON
     #     Convert them to the appropriate format (Check HTML or Markdown)
     #     Send the result
-    #   else 
-    #     return a funny error message (maybe a GIF) asking to use only the available commands and run /help to see all available
+    #   else
+    #     return a funny error message (maybe a GIF)
+    # asking to use only the available commands and run 
+    # help to see all available
     #     print the command that the User entered
+    # future improvements, search synonims API for searching synonims and search google API for searching anything
+    # add a game of Tic Tac Toe or Rock Paper Scissors
 
-      # future improvements, search synonims API for searching synonims and search google API for searching anything
-      # add a game of Tic Tac Toe or Rock Paper Scissors
+    case message.text
+    when '/start'
+      bot.api.send_message(chat_id: message.chat.id, text: "Hello, #{message.from.first_name}")
+    when '/stop'
+      bot.api.send_message(chat_id: message.chat.id, text: "Bye, #{message.from.first_name}")
+    # when '/dice'
+    #   bot.api.sendDice(chat_id: message.chat.id, text: "Bye, #{message.from.first_name}")
+    else
+      bot.api.send_message(chat_id: message.chat.id, text: "Why you wrote `#{message.text}`")
+    end
   end
 end
 
