@@ -9,10 +9,12 @@
 # #   ADD Wikipedia URL to the Environments
 # #     Search Class
 # #       - check_query(query)
+# #       - loading_message(query)
 # #     Random Class
+# #       - loading_message
 # #     Utils module
-# #       - uri(url, query = nil)
-# #       - loading_message(query = nil)
+# #       - uri(query = nil)
+## #       - loading_message(query = nil)
 # #       - result.to_markdown
 # #       - counter(seconds)
 # #       - get_results(uri)
