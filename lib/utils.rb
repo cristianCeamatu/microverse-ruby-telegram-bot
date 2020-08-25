@@ -1,13 +1,15 @@
 require 'httparty'
-require 'dotenv'
-Dotenv.load
 
 module Utils
   def uri(query = nil)
-    return ENV['WIKIPEDIA_RANDOM_API'] if query.nil?
+    return "#{ENV['WIKIPEDIA_BASE_URI']}&generator=random&grnnamespace=0&grnlimit=3" if query.nil?
 
-    result = "#{ENV['WIKIPEDIA_SEARCH_API']}#{query}"
-    result
+    "#{ENV['WIKIPEDIA_BASE_URI']}&list=search&utf8=1&origin=*&srlimit=3&srsearch=#{query}"
+  end
+
+  def get_query_from_message(message)
+    array = message.split
+    array[2, array.size - 1].join(' ')
   end
 
   def to_markdown(results)
