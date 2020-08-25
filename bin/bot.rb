@@ -1,4 +1,4 @@
-#!/usr/bin/env ruby
+#!/usr/bin/env ruby # rubocop: disable Lint/ScriptPermission
 
 require 'colorize'
 require 'telegram/bot'
@@ -31,7 +31,6 @@ Telegram::Bot::Client.run(ENV['TELEGRAM_BOT_TOKEN'], logger: Logger.new($stderr)
     # help to see all available
     # future improvements, search synonims API for searching synonims and search google API for searching anything
 
-    # rubocop: disable Layout/LineLength
     gif = gif_items[rand(1..10)] if gif_items
     case message.text
     when '/start'
@@ -49,7 +48,7 @@ Telegram::Bot::Client.run(ENV['TELEGRAM_BOT_TOKEN'], logger: Logger.new($stderr)
     when '/stop'
       bot.api.send_message(chat_id: message.chat.id, text: 'You can never stop me!')
       sleep 1
-      bot.api.send_message(chat_id: message.chat.id, text: '<b>I know who you are and where you live!!!</b>', parse_mode: 'HTML')
+      bot.api.send_message(chat_id: message.chat.id, text: '<b>I know who you are and where you live!!!</b>', parse_mode: 'HTML') # rubocop: disable Layout/LineLength
       sleep 1
       bot.api.send_message(chat_id: message.chat.id, text: message.from.first_name)
       sleep 1
@@ -66,7 +65,7 @@ Telegram::Bot::Client.run(ENV['TELEGRAM_BOT_TOKEN'], logger: Logger.new($stderr)
           bot.api.send_message(chat_id: message.chat.id, text: "https://en.wikipedia.org/wiki/#{el[1]['title']}")
         end
       elsif search.check_query(query) == query.strip
-        bot.api.send_message(chat_id: message.chat.id, text: "You are searching on Wikipedia for `#{get_query_from_message(message.text)}`!")
+        bot.api.send_message(chat_id: message.chat.id, text: "You are searching on Wikipedia for `#{get_query_from_message(message.text)}`!") # rubocop: disable Layout/LineLength
         sleep 1
         bot.api.send_message(chat_id: message.chat.id, text: 'I will give you 3 wikipedia results:')
         sleep 1
@@ -76,7 +75,7 @@ Telegram::Bot::Client.run(ENV['TELEGRAM_BOT_TOKEN'], logger: Logger.new($stderr)
           sleep 1
         end
       else
-        bot.api.send_message(chat_id: message.chat.id, text: search.check_query(query)) unless search.check_query(query) == query.strip
+        bot.api.send_message(chat_id: message.chat.id, text: search.check_query(query)) unless search.check_query(query) == query.strip # rubocop: disable Layout/LineLength
         bot.api.send_animation(chat_id: message.chat.id, animation: gif) if gif
       end
     when '/help'
