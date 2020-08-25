@@ -1,13 +1,14 @@
 #!/usr/bin/env ruby
+
+require 'colorize'
 require 'telegram/bot'
 require 'dotenv'
 Dotenv.load
 
-p 'The ruby bot has started, you can check it at the link: https://t.me/rock_paper_scissors2020_bot'
+Telegram::Bot::Client.run(ENV['TELEGRAM_BOT_API'], logger: Logger.new($stderr)) do |bot|
+  bot.logger.info('Bot has been started, you can check it at the link:' << ' https://t.me/rock_paper_scissors2020_bot'.yellow.bold)
 
-Telegram::Bot::Client.run(ENV['TELEGRAM_BOT_API']) do |bot|
   bot.listen do |message|
-    p message.text
     case message.text
     when '/start'
       bot.api.send_message(chat_id: message.chat.id, text: "Hello, #{message.from.first_name}")

@@ -1,0 +1,2 @@
+describe 'bot' do
+end
