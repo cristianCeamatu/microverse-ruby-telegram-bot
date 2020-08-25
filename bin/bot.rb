@@ -1,4 +1,4 @@
-#!/usr/bin/env ruby # rubocop: disable Lint/ScriptPermission
+#!/usr/bin/env ruby
 
 require 'colorize'
 require 'telegram/bot'
@@ -53,6 +53,16 @@ Telegram::Bot::Client.run(ENV['TELEGRAM_BOT_TOKEN'], logger: Logger.new($stderr)
       bot.api.send_message(chat_id: message.chat.id, text: message.from.first_name)
       sleep 1
       bot.api.send_animation(chat_id: message.chat.id, animation: gif) if gif
+    when '/help'
+      bot.api.send_message(chat_id: message.chat.id, text: 'Available commands:')
+      sleep 1
+      bot.api.send_message(chat_id: message.chat.id, text: '/search wiki <your search query>')
+      sleep 1
+      bot.api.send_message(chat_id: message.chat.id, text: '/search wiki random (get 3 random results)')
+      sleep 1
+      bot.api.send_message(chat_id: message.chat.id, text: 'Don`t be shy, just try!')
+      sleep 1
+      bot.api.send_animation(chat_id: message.chat.id, animation: gif) if gif
     when /^\/search wiki /i # rubocop: disable Style/RegexpLiteral
       query = get_query_from_message(message.text)
       search = Search.new(query)
@@ -78,16 +88,6 @@ Telegram::Bot::Client.run(ENV['TELEGRAM_BOT_TOKEN'], logger: Logger.new($stderr)
         bot.api.send_message(chat_id: message.chat.id, text: search.check_query(query)) unless search.check_query(query) == query.strip # rubocop: disable Layout/LineLength
         bot.api.send_animation(chat_id: message.chat.id, animation: gif) if gif
       end
-    when '/help'
-      bot.api.send_message(chat_id: message.chat.id, text: 'Available commands:')
-      sleep 1
-      bot.api.send_message(chat_id: message.chat.id, text: '/search wiki <your search query>')
-      sleep 1
-      bot.api.send_message(chat_id: message.chat.id, text: '/search wiki random (get 3 random results)')
-      sleep 1
-      bot.api.send_message(chat_id: message.chat.id, text: 'Don`t be shy, just try!')
-      sleep 1
-      bot.api.send_animation(chat_id: message.chat.id, animation: gif) if gif
     else
       bot.api.send_message(chat_id: message.chat.id, text: "Why you wrote `#{message.text}`")
       sleep 1

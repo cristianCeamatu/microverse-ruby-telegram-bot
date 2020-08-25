@@ -7,8 +7,8 @@ describe Utils do
 
   describe '#uri' do
     context 'when the parameter' do
-      let(:search_url) { "#{ENV['WIKIPEDIA_BASE_URI']}&list=search&utf8=1&origin=*&srsearch=" }
-      let(:random_uri) { "#{ENV['WIKIPEDIA_BASE_URI']}&generator=random&grnnamespace=0&grnlimit=1" }
+      let(:search_url) { "#{ENV['WIKIPEDIA_BASE_URI']}&list=search&utf8=1&origin=*&srlimit=3&srsearch=" }
+      let(:random_uri) { "#{ENV['WIKIPEDIA_BASE_URI']}&generator=random&grnnamespace=0&grnlimit=3" }
 
       it 'is nil, it returns the Random URI Wikipedia API link' do
         expect(uri).to eql(random_uri)
