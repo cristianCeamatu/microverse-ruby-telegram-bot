@@ -9,7 +9,7 @@
 ![image](.github/app_screenshot.png)
 
 ## The files structure of the project
-![screenshot](.github/folder-structure.png)
+![screenshot](.github/folder_structure.png)
 
 ## Available commands for the master-search-bot
 
