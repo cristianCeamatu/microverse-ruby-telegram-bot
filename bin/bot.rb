@@ -1,74 +1,107 @@
-# #!/usr/bin/env ruby
+# !/usr/bin/env ruby
 
-# require 'colorize'
-# require 'telegram/bot'
-# require 'dotenv'
-# Dotenv.load
+require 'colorize'
+require 'telegram/bot'
+require 'dotenv'
+Dotenv.load
 
-# # Prerequisites
-# #   ADD Wikipedia URL to the Environments
-# #     Search Class
-# #       - check_query(query)
-# #     Random Class
-# #     Utils module
-# #       - uri(url, query = nil)
-# #       - loading_message(query = nil)
-# #       - result.to_markdown
-# #       - counter(seconds)
-# #       - get_results(uri)
+require_relative '../lib/utils'
+require_relative '../lib/search'
+# Prerequisites
+#   ADD Wikipedia URL to the Environments
+#     Search Class
+#       - check_query(query)
+#       - loading_message(query)
+#     Random Class
+#       - loading_message
+#     Utils module
+#       - uri(query = nil)
+# #     - loading_message(query = nil)
+#       - result.to_markdown
+#       - counter(seconds)
+#       - results(uri)
 
-# # p 'The ruby bot has started, you can check it at the link: https://t.me/rock_paper_scissors2020_bot'
+Telegram::Bot::Client.run(ENV['TELEGRAM_BOT_TOKEN'], logger: Logger.new($stderr)) do |bot| # rubocop: disable Metrics/BlockLength
+  include Utils
 
-# Telegram::Bot::Client.run(ENV['TELEGRAM_BOT_API'], logger: Logger.new($stderr)) do |bot|
-#   bot.logger.info('Bot has been started, you can check it at the link:' << ' https://t.me/rock_paper_scissors2020_bot'.yellow.bold)
-#   # Print a nice an funny message (maybe with a Gif) that we can find anything: Have questions? I have the answeres!
-#   # I am the Search Bot! Don`t know what to search? Type /random to get a random Wikipedia link
-#   bot.listen do |message|
-#     # Accepts both inline messages and direct chat, has the same response in both cases
-#     #   start a case for the message text:
-#     #   when the message starts with `search`
-#     #     if is followed by a `query string` (length: maximum 50, minimum 2)
-#     #       Print a message that we are searching the Wikipedia website for results
-#     #       Set the url for Wikipedia with the escaped string attached
-#     #       Request 5-10 results from Wikipedia as JSON
-#     #       Convert them to the appropriate format (Check HTML or Markdown)
-#     #       Send the result
-#     #     else return an message asking to enter a string having between 2-50 characters
-#     #   when the stripped message is `random`
-#     #     Print a message that we are returning an Wikipedia random search
-#     #     Set the url for Wikipedia with the escaped string attached
-#     #     Request 5-10 results from Wikipedia as JSON
-#     #     Convert them to the appropriate format (Check HTML or Markdown)
-#     #     Send the result
-#     #   else
-#     #     return a funny error message (maybe a GIF)
-#     # asking to use only the available commands and run
-#     # help to see all available
-#     #     print the command that the User entered
-#     # future improvements, search synonims API for searching synonims and search google API for searching anything
-#     # add a game of Tic Tac Toe or Rock Paper Scissors
+  bot.logger.info('Bot has been started, you can check it at the link:' << ' http://t.me/master_search_ruby_bot'.yellow.bold)
+  gif_items = results(ENV['TENOR_BASE_URI'])['results'].map { |el| el['media'][0]['gif']['url'] }
+  bot.listen do |message| # rubocop: disable Metrics/BlockLength
+    # Accepts both inline messages and direct chat, has the same response in both cases
+    # help to see all available
+    # future improvements, search synonims API for searching synonims and search google API for searching anything
 
-#     case message.text
-#     when '/start'
-#       bot.api.send_message(chat_id: message.chat.id, text: "Hello, #{message.from.first_name}")
-#     when '/stop'
-#       bot.api.send_message(chat_id: message.chat.id, text: "Bye, #{message.from.first_name}")
-#     # when '/dice'
-#     #   bot.api.sendDice(chat_id: message.chat.id, text: "Bye, #{message.from.first_name}")
-#     else
-#       bot.api.send_message(chat_id: message.chat.id, text: "Why you wrote `#{message.text}`")
-#     end
-#   end
-# end
+    gif = gif_items[rand(1..10)] if gif_items
+    case message.text
+    when '/start'
+      bot.api.send_message(chat_id: message.chat.id, text: 'Did somebody call the Master Search bot?')
+      sleep 1
+      bot.api.send_message(chat_id: message.chat.id, text: "Was that you #{message.from.first_name}?")
+      sleep 1
+      bot.api.send_message(chat_id: message.chat.id, text: 'Have questions? I have the answers!')
+      sleep 1
+      bot.api.send_animation(chat_id: message.chat.id, animation: gif) if gif
+      sleep 1
+      bot.api.send_message(chat_id: message.chat.id, text: 'Type `/search wiki <and your query>` to see what I can do!')
+      sleep 1
+      bot.api.send_message(chat_id: message.chat.id, text: 'Type `/search wiki random` to get 3 random results')
+    when '/stop'
+      bot.api.send_message(chat_id: message.chat.id, text: 'You can never stop me!')
+      sleep 1
+      bot.api.send_message(chat_id: message.chat.id, text: '<b>I know who you are and where you live!!!</b>', parse_mode: 'HTML') # rubocop: disable Layout/LineLength
+      sleep 1
+      bot.api.send_message(chat_id: message.chat.id, text: message.from.first_name)
+      sleep 1
+      bot.api.send_animation(chat_id: message.chat.id, animation: gif) if gif
+    when '/help'
+      bot.api.send_message(chat_id: message.chat.id, text: 'Available commands:')
+      sleep 1
+      bot.api.send_message(chat_id: message.chat.id, text: '/search wiki <your search query>')
+      sleep 1
+      bot.api.send_message(chat_id: message.chat.id, text: '/search wiki random (get 3 random results)')
+      sleep 1
+      bot.api.send_message(chat_id: message.chat.id, text: 'Don`t be shy, just try!')
+      sleep 1
+      bot.api.send_animation(chat_id: message.chat.id, animation: gif) if gif
+    when /^\/search wiki /i # rubocop: disable Style/RegexpLiteral
+      query = get_query_from_message(message.text)
+      search = Search.new(query)
 
-# # p message.text
-# # case message.text
-# # when '/start'
-# #   bot.api.send_message(chat_id: message.chat.id, text: "Hello, #{message.from.first_name}")
-# # when '/stop'
-# #   bot.api.send_message(chat_id: message.chat.id, text: "Bye, #{message.from.first_name}")
-# # # when '/dice'
-# # #   bot.api.sendDice(chat_id: message.chat.id, text: "Bye, #{message.from.first_name}")
-# # else
-# #   bot.api.send_message(chat_id: message.chat.id, text: "Why you wrote `#{message.text}`")
-# # end
+      if query.downcase == 'random'
+        bot.api.send_message(chat_id: message.chat.id, text: 'I will give you 3 random wikipedia results:')
+        response = search.results(uri(nil))
+        response['query']['pages'].to_a.each do |el|
+          sleep 1
+          bot.api.send_message(chat_id: message.chat.id, text: "https://en.wikipedia.org/wiki/#{el[1]['title']}")
+        end
+      elsif search.check_query(query) == query.strip
+        bot.api.send_message(chat_id: message.chat.id, text: "You are searching on Wikipedia for `#{get_query_from_message(message.text)}`!") # rubocop: disable Layout/LineLength
+        sleep 1
+        bot.api.send_message(chat_id: message.chat.id, text: 'I will give you 3 wikipedia results:')
+        sleep 1
+        response = search.results(uri(query.strip))
+        response['query']['search'].each do |el|
+          bot.api.send_message(chat_id: message.chat.id, text: "https://en.wikipedia.org/wiki/#{el['title']}")
+          sleep 1
+        end
+      else
+        bot.api.send_message(chat_id: message.chat.id, text: search.check_query(query)) unless search.check_query(query) == query.strip # rubocop: disable Layout/LineLength
+        bot.api.send_animation(chat_id: message.chat.id, animation: gif) if gif
+      end
+    else
+      bot.api.send_message(chat_id: message.chat.id, text: "Why you wrote `#{message.text}`")
+      sleep 1
+      bot.api.send_message(chat_id: message.chat.id, text: 'You need to write one of the following commands:')
+      sleep 1
+      bot.api.send_message(chat_id: message.chat.id, text: '`/start` to get a nice Gif and a greetings message')
+      sleep 1
+      bot.api.send_message(chat_id: message.chat.id, text: '`/search wiki <your search query>`')
+      sleep 1
+      bot.api.send_message(chat_id: message.chat.id, text: '`/search wiki random` (get 3 random results)')
+      sleep 1
+      bot.api.send_message(chat_id: message.chat.id, text: '`/stop` to get a bad Gif and a Bye Bye message')
+      sleep 1
+      bot.api.send_animation(chat_id: message.chat.id, animation: gif) if gif
+    end
+  end
+end

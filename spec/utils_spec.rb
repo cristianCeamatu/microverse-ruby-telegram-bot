@@ -1,45 +1,50 @@
-require 'json'
-
 require_relative '../lib/utils'
+require 'dotenv'
+Dotenv.load
 
 describe Utils do
-  describe '#loading_message' do
-    @message = 'Wait while I use my super powers to give you a random article.' \
-      'I could return the result instantly but counters make me feel important :D'
-    it 'returns a message describing a Random query request' do
-      expect(Random.loading_message).to eql(message)
-    end
-  end
+  include Utils
 
   describe '#uri' do
-    context 'when the second parameter' do
-      @url = ENV['WIKIPEDIA_URL_API']
+    context 'when the parameter' do
+      let(:search_url) { "#{ENV['WIKIPEDIA_BASE_URI']}&list=search&utf8=1&origin=*&srlimit=3&srsearch=" }
+      let(:random_uri) { "#{ENV['WIKIPEDIA_BASE_URI']}&generator=random&grnnamespace=0&grnlimit=3" }
 
-      it 'is nil, it returns the Random URI Wikipedia link' do
-        expect(Random.uri(url)).to eql(ENV['WIKIPEDIA_URL_API'] << 'random')
+      it 'is nil, it returns the Random URI Wikipedia API link' do
+        expect(uri).to eql(random_uri)
       end
 
       it 'is a string, it returns the Search URI Wikipedia with the parameter as a query' do
-        expect(Random.uri(url)).to eql(ENV['WIKIPEDIA_URL_API'] << 'query')
+        expect(uri('text')).to eql("#{search_url}text")
       end
+    end
+  end
+
+  describe '#results(uri)' do
+    it 'returns a JSON that we convert to a hash with JSON.parse' do
+      expect(results(uri)).to be_a(Hash)
+    end
+
+    it 'returns an error if we don`t have results' do
+      expect(results('xx')).to eql('No results found, please try again!')
     end
   end
 
   describe '#to_markdown' do
     # before, we need to get a resultJSON
-    result_json = '{"one":1,"two":2}'.to_json
-    it 'converts json to string(markdown/html)' do
-      expect(to_markdown(result_json)).to be_a(String)
+    result = JSON.parse('{"one":1,"two":2}')
+    it 'converts JSON/Hash result to string(markdown/html)' do
+      expect(to_markdown(result)).to be_a(String)
     end
   end
 
-  describe '#get_results' do
+  describe '#results(uri)' do
     it 'returns a JSON that we convert to a hash with JSON.parse' do
-      expect(JSON.parse(get_results(uri))).to be_a(Hash)
+      expect(results(uri)).to be_a(Hash)
     end
 
     it 'returns an error if we don`t have results' do
-      expect(get_results(uri)).to eql('No results found, please try again!')
+      expect(results('xx')).to eql('No results found, please try again!')
     end
   end
 end
