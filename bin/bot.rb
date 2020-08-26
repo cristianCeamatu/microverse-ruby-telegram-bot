@@ -7,29 +7,14 @@ Dotenv.load
 
 require_relative '../lib/utils'
 require_relative '../lib/search'
-# Prerequisites
-#   ADD Wikipedia URL to the Environments
-#     Search Class
-#       - check_query(query)
-#       - loading_message(query)
-#     Random Class
-#       - loading_message
-#     Utils module
-#       - uri(query = nil)
-# #     - loading_message(query = nil)
-#       - result.to_markdown
-#       - counter(seconds)
-#       - results(uri)
 
 Telegram::Bot::Client.run(ENV['TELEGRAM_BOT_TOKEN'], logger: Logger.new($stderr)) do |bot| # rubocop: disable Metrics/BlockLength
   include Utils
 
-  bot.logger.info('Bot has been started, you can check it at the link:' << ' http://t.me/master_search_ruby_bot'.yellow.bold)
-  gif_items = results(ENV['TENOR_BASE_URI'])['results'].map { |el| el['media'][0]['gif']['url'] }
+  bot.logger.info('Bot has been started, you can check it at the link: ' << 'http://t.me/master_search_ruby_bot'.yellow.bold)
+
   bot.listen do |message| # rubocop: disable Metrics/BlockLength
     # Accepts both inline messages and direct chat, has the same response in both cases
-    # help to see all available
-    # future improvements, search synonims API for searching synonims and search google API for searching anything
 
     gif = gif_items[rand(1..10)] if gif_items
     case message.text
@@ -42,9 +27,9 @@ Telegram::Bot::Client.run(ENV['TELEGRAM_BOT_TOKEN'], logger: Logger.new($stderr)
       sleep 1
       bot.api.send_animation(chat_id: message.chat.id, animation: gif) if gif
       sleep 1
-      bot.api.send_message(chat_id: message.chat.id, text: 'Type `/search wiki <and your query>` to see what I can do!')
+      bot.api.send_message(chat_id: message.chat.id, text: 'Type `search wiki <and some text>` to see what I can do!')
       sleep 1
-      bot.api.send_message(chat_id: message.chat.id, text: 'Type `/search wiki random` to get 3 random results')
+      bot.api.send_message(chat_id: message.chat.id, text: 'Type `search wiki random` to get 3 random results')
     when '/stop'
       bot.api.send_message(chat_id: message.chat.id, text: 'You can never stop me!')
       sleep 1
@@ -56,16 +41,16 @@ Telegram::Bot::Client.run(ENV['TELEGRAM_BOT_TOKEN'], logger: Logger.new($stderr)
     when '/help'
       bot.api.send_message(chat_id: message.chat.id, text: 'Available commands:')
       sleep 1
-      bot.api.send_message(chat_id: message.chat.id, text: '/search wiki <your search query>')
+      bot.api.send_message(chat_id: message.chat.id, text: 'search wiki <and some text>')
       sleep 1
-      bot.api.send_message(chat_id: message.chat.id, text: '/search wiki random (get 3 random results)')
+      bot.api.send_message(chat_id: message.chat.id, text: 'search wiki random (get 3 random results)')
       sleep 1
       bot.api.send_message(chat_id: message.chat.id, text: 'Don`t be shy, just try!')
       sleep 1
       bot.api.send_animation(chat_id: message.chat.id, animation: gif) if gif
-    when /^\/search wiki /i # rubocop: disable Style/RegexpLiteral
+    when /^search wiki /i
       query = get_query_from_message(message.text)
-      search = Search.new(query)
+      search = Search.new
 
       if query.downcase == 'random'
         bot.api.send_message(chat_id: message.chat.id, text: 'I will give you 3 random wikipedia results:')
@@ -95,9 +80,9 @@ Telegram::Bot::Client.run(ENV['TELEGRAM_BOT_TOKEN'], logger: Logger.new($stderr)
       sleep 1
       bot.api.send_message(chat_id: message.chat.id, text: '`/start` to get a nice Gif and a greetings message')
       sleep 1
-      bot.api.send_message(chat_id: message.chat.id, text: '`/search wiki <your search query>`')
+      bot.api.send_message(chat_id: message.chat.id, text: '`search wiki <and some text>`')
       sleep 1
-      bot.api.send_message(chat_id: message.chat.id, text: '`/search wiki random` (get 3 random results)')
+      bot.api.send_message(chat_id: message.chat.id, text: '`search wiki random` (get 3 random results)')
       sleep 1
       bot.api.send_message(chat_id: message.chat.id, text: '`/stop` to get a bad Gif and a Bye Bye message')
       sleep 1

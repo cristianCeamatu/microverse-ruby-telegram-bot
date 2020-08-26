@@ -3,18 +3,10 @@ require_relative '../lib/utils'
 
 describe Search do
   let(:query) { 'text' }
-  let(:search) { Search.new(query) }
+  let(:search) { Search.new }
 
   it 'includes the Utils module' do
     expect(search.singleton_class.include?(Utils)).to eql(true)
-  end
-
-  it 'has a loading message' do
-    expect(search.loading_message).to be_a(String)
-  end
-
-  it 'the loading message includes the searched query' do
-    expect(search.loading_message).to include(query)
   end
 
   describe '#check_query' do

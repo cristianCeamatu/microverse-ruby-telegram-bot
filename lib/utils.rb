@@ -12,21 +12,18 @@ module Utils
     array[2, array.size - 1].join(' ')
   end
 
-  def to_markdown(results)
-    result = ''
-    results.each do |item|
-      result += "#{item[0]}: #{item[1]}"
-    end
-    result
-  end
-
   def results(uri)
     response = ''
     begin
       response = JSON.parse(HTTParty.get(uri).body)
+      response = response.size.positive? ? response : '0 results found for your search, please try again!'
     rescue => e # rubocop:disable Style/RescueStandardError, Lint/UselessAssignment
-      response = 'No results found, please try again!'
+      response = 'Connection failed, server error or your link is broken please try again!'
     end
     response
+  end
+
+  def gif_items
+    results(ENV['TENOR_BASE_URI'])['results'].map { |el| el['media'][0]['gif']['url'] }
   end
 end

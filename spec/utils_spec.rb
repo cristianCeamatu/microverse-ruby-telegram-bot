@@ -25,26 +25,8 @@ describe Utils do
       expect(results(uri)).to be_a(Hash)
     end
 
-    it 'returns an error if we don`t have results' do
-      expect(results('xx')).to eql('No results found, please try again!')
-    end
-  end
-
-  describe '#to_markdown' do
-    # before, we need to get a resultJSON
-    result = JSON.parse('{"one":1,"two":2}')
-    it 'converts JSON/Hash result to string(markdown/html)' do
-      expect(to_markdown(result)).to be_a(String)
-    end
-  end
-
-  describe '#results(uri)' do
-    it 'returns a JSON that we convert to a hash with JSON.parse' do
-      expect(results(uri)).to be_a(Hash)
-    end
-
-    it 'returns an error if we don`t have results' do
-      expect(results('xx')).to eql('No results found, please try again!')
+    it 'returns an error if there is a connection error' do
+      expect(results('xx')).to eql('Connection failed, server error or your link is broken please try again!')
     end
   end
 end
