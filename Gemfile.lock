@@ -58,6 +58,3 @@ DEPENDENCIES
   httparty
   rspec
   telegram-bot-ruby
-
-BUNDLED WITH
-   2.1.4
