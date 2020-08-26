@@ -50,7 +50,7 @@ GEM
       equalizer (~> 0.0, >= 0.0.9)
 
 PLATFORMS
-  x64-mingw32
+  ruby
 
 DEPENDENCIES
   colorize
@@ -58,3 +58,6 @@ DEPENDENCIES
   httparty
   rspec
   telegram-bot-ruby
+
+BUNDLED WITH
+   2.1.4
