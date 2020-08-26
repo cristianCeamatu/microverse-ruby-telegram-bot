@@ -5,8 +5,8 @@
 > In this project, I built a Telegram Bot that can search on Wikipedia or get you 3 random Wikipedia articles. It also sends you random funny Gifs every time you write something else in the chat or you use the /start and /stop commands. The main goal is to make a massive use of external API`s by putting into practice the main concepts of Object Oriented Programming, classes, modules, objects and accessing their attributes.<br>
 > The project is built using the TDD technique.
 
-## You can see a short demo of the Bot in the GIF below.
-![image](.github/captured.gif)
+## You can see a short demo of the Bot /start command in the screenshot below.
+![image](.github/app_screenshot.png)
 
 ## The files structure of the project
 ![screenshot](.github/folder-structure.png)
@@ -15,9 +15,10 @@
 
 1. `/start` receive a greetings message, all available commands and a funny random Gif
 2. `/stop` receive a farewell message, a nice joke and a funny random Gif
-3. `/search wiki <your query>` receive a loading message and 3 Wikipedia articles related to your search query
-2. `/search wiki random` receive 3 random Wikipedia articles
-3. Writed anything else in the chat and you will be informed about the available commands and receive a random funny Gif
+3. `/search wiki <your query>` receive a loading message and maximum 3 Wikipedia articles related to your search query
+4. `/search wiki random` receive 3 random Wikipedia articles
+4. `/search google <your query>` receive a loading message and maximum 3 articles from the Google Websites (not a google search)
+5. Writed anything else in the chat and you will be informed about the available commands and receive a random funny Gif
 
 ## Video Explanation
 
@@ -77,6 +78,10 @@ The **./lib** folder contains subsidiary files that set up all of the classes an
 
 - **search.rb**, where the Search class is defined.
 - **utils.rb**, where the Utils module is defined.
+- **responder.rb**, the Responder class that takes the messages and delegates responses.
+- **bot_replies.rb**, where the BotReplies module includes together all the other reply modules.
+- **bot_command_replies.rb**, where the BotCommandReplies module is defined.
+- **bot_search_replies.rb**, where the BotSearchReplies module is defined.
 
 The **./spec** folder contains all the relative spec tests
 
