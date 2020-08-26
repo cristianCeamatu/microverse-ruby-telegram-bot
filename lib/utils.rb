@@ -1,4 +1,6 @@
 require 'httparty'
+require 'dotenv'
+Dotenv.load
 
 module Utils
   def uri(type = 'wiki', query = nil)

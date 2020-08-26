@@ -20,7 +20,7 @@
 2. `/stop` receive a farewell message, a nice joke and a funny random Gif
 3. `/search wiki <your query>` receive a loading message and maximum 3 Wikipedia articles related to your search query
 4. `/search wiki random` receive 3 random Wikipedia articles
-4. `/search google <your query>` receive a loading message and maximum 3 articles from the Google Websites (not a google search)
+4. `/search google <your query>` receive a loading message and maximum 3 articles from the Google Domain Websites (**not a regular google search**)
 5. Writed anything else in the chat and you will be informed about the available commands and receive a random funny Gif
 
 ## Video Explanation
@@ -65,7 +65,7 @@ Visit [Tenor API page](https://tenor.com/gifapi/documentation) and follow the qu
 **Step 6**<br>
 Visit [Google API page](https://developers.google.com/custom-search/v1/overview) and follow the quickstart steps to get the API token.<br>
 **Step 7**<br>
-Run `mv .env_sample .env` on your terminal to create the `.env` file. Then add your tokens in the required fields `TELEGRAM_BOT_TOKEN=` and `TENOR_API_TOKEN=` inside the file.<br>
+Run `touch .env` on your terminal to create the `.env` file. Then add your tokens in the required fields `TELEGRAM_BOT_TOKEN=` and `TENOR_API_TOKEN=` inside the file.<br>
 **Step 8**<br>
 Run `ruby bin/bot.rb` to start the bot.<br>
 **Step 9**<br>
