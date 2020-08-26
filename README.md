@@ -2,9 +2,10 @@
 
 # The Master Seach Telegram Bot
 
-> In this project, I built a Telegram Bot that can search on Wikipedia or get you 3 random Wikipedia articles. It also send you random funny Gifs every time you write something else in the chat or you use the /start and /stop commands. The main goal is to make a massive use of external API`s by put into practice the main concepts of Object Oriented Programming, classes, modules, objects and access their attributes.
+> In this project, I built a Telegram Bot that can search on Wikipedia or get you 3 random Wikipedia articles. It also sends you random funny Gifs every time you write something else in the chat or you use the /start and /stop commands. The main goal is to make a massive use of external API`s by putting into practice the main concepts of Object Oriented Programming, classes, modules, objects and accessing their attributes.<br>
+> The project is built using the TDD technique.
 
-## You can see a short demo of the game in the GIF below.
+## You can see a short demo of the Bot in the GIF below.
 ![image](.github/captured.gif)
 
 ## The files structure of the project
@@ -58,13 +59,13 @@ Download the [Telegram app](https://desktop.telegram.org/), create an account an
 **Step5**<br>
 Visit [Tenor API page](https://tenor.com/gifapi/documentation) and follow the quickstart steps to get a Tenor API Key.<br>
 **Step 6**<br>
-Run `mv .env_sample .env` on your terminal to create the `.env` file. Then add your tokens in the required fields `TELEGRAM_BOT_TOKEN=` and `TENOR_API_TOKEN` inside the file.<br>
+Run `mv .env_sample .env` on your terminal to create the `.env` file. Then add your tokens in the required fields `TELEGRAM_BOT_TOKEN=` and `TENOR_API_TOKEN=` inside the file.<br>
 **Step7**<br>
 Run `ruby bin/bot.rb` to start the bot.<br>
 **Step 8**<br>
 Open the link to the bot that you received from the Botfather.<br>
 **Step 9**<br>
-You can start using the commands defined above.<br>
+You can use the commands defined in the [Available commands section](#available-commands-for-the-master-search-bot) defined above.<br>
 
 ## Repository Contents
 
