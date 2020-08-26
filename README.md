@@ -1,56 +1,102 @@
-# Bubble Sort
+![Hireable](https://img.shields.io/badge/Hireable-yes-success) ![](https://img.shields.io/badge/-Microverse%20projects-blueviolet)
 
-> For this project, we created two **sorting algorithms** that use the [bubble sort](https://en.wikipedia.org/wiki/Bubble_sort) method. 
+# The Master Seach Telegram Bot
 
-This side-by-side comparative method is seen in the GIF image below.
+> In this project, I built a Telegram Bot that can search on Wikipedia or get you 3 random Wikipedia articles. It also sends you random funny Gifs every time you write something else in the chat or you use the /start and /stop commands. The main goal is to make a massive use of external API`s by putting into practice the main concepts of Object Oriented Programming, classes, modules, objects and accessing their attributes.<br>
+> The project is built using the TDD technique.
 
-![image](.github/animation.gif)
+## You can see a short demo of the Bot in the GIF below.
+![image](.github/captured.gif)
 
-![screenshot](.github/bubble_sort.png)
-![screenshot](.github/bubble_sort_by2.png)
+## The files structure of the project
+![screenshot](.github/folder-structure.png)
 
-> The second bubble sort method sorts an array of strings by the length of each element using the "yield" keyword and a code block.
+## Available commands for the master-search-bot
 
-*Note: The first algorithm exits once an iteration is passed without any swaps made, signalling that the array is completely sorted. The second algorithm iterates the maximum possible number times (array.length - 1) before exiting. While both methods are suitable for the purposes of this project, it should be noted the first method is better practice in that it does not run code unnecessarily.*
+1. `/start` receive a greetings message, all available commands and a funny random Gif
+2. `/stop` receive a farewell message, a nice joke and a funny random Gif
+3. `/search wiki <your query>` receive a loading message and 3 Wikipedia articles related to your search query
+2. `/search wiki random` receive 3 random Wikipedia articles
+3. Writed anything else in the chat and you will be informed about the available commands and receive a random funny Gif
+
+## Video Explanation
+
+Here is the [video explanation](https://www.loom.com/share/de84556995414869b6f6e127f291ac27) of this project.
 
 ## Built With
-- Ruby
-- VSCode
-- Rubocop
+* Ruby
+* [Telegram API](https://core.telegram.org/api)
+* [Wikipedia API](https://www.mediawiki.org/wiki/API:Main_page/en)
+* [Tenor Gif API](https://tenor.com/gifapi/documentation)
+* RSpec
+* Rubocop
 
-## Live Demo
+## Ruby gems dependencies
+* 'colorize'
+* 'dotenv'
+* 'httparty'
+* 'telegram-bot-ruby
 
-To quickly see our project in action, visit the [live demo](https://repl.it/@cristianCeamatu/Bubble-Sort#main.rb) on repl.it.
+## Prerequisities
+
+To get this project up and running locally, you must have ruby installed on your computer.
 
 ## Getting Started
 
-### Prerequisites
-
-To get this project up and running, you must already have ruby installed on your computer.
-
-### Installation
-
 **To get this project set up on your local machine, follow these simple steps:**
 
-1. Open Terminal.
+**Step 1**<br>
+Navigate through the local folder where you want to clone the repository and run<br>
+`git clone git@github.com:cristianCeamatu/microverse-ruby-telegram-bot.git`. It will clone the repo to your local folder.<br>
+or with https<br>
+`git clone https://github.com/cristianCeamatu/microverse-ruby-telegram-bot.git`.<br>
+**Step 2**<br>
+Run `cd microverse-ruby-telegram-bot`<br>
+**Step 3**<br>
+Run `bundle install` to install the gems from the `Gemfile`.<br>
+**Step 4**<br>
+Download the [Telegram app](https://desktop.telegram.org/), create an account and talk to the [Botfather](https://t.me/botfather). Follow the instructions and create a bot, you will then receive an API Token that looks like this: `1347431199:AAH4hPt6PDiJB4swk23Lb4oOzwocjKpba0S4` and the link to your bot.<br>
+**Step5**<br>
+Visit [Tenor API page](https://tenor.com/gifapi/documentation) and follow the quickstart steps to get a Tenor API Key.<br>
+**Step 6**<br>
+Run `mv .env_sample .env` on your terminal to create the `.env` file. Then add your tokens in the required fields `TELEGRAM_BOT_TOKEN=` and `TENOR_API_TOKEN=` inside the file.<br>
+**Step7**<br>
+Run `ruby bin/bot.rb` to start the bot.<br>
+**Step 8**<br>
+Open the link to the bot that you received from the Botfather.<br>
+**Step 9**<br>
+You can use the commands defined in the [Available commands section](#available-commands-for-the-master-search-bot) defined above.<br>
 
-2. Navigate to your desired location to download the contents of this repository.
+## Repository Contents
 
-3. Copy and paste the following code into the Terminal:
+The code for the project is divided into the following directories: **./bin**, **./lib**, and **./spec**.
 
-    git clone https://github.com/cristianCeamatu/microverse-bubble-sort.git
+The **./bin** folder contains the executable **bot.rb** file.
 
-4. Hit enter.
+The **./lib** folder contains subsidiary files that set up all of the classes and methods used in bin/main.rb
 
-5. Once the repository has been cloned, navigate inside the repository and type:
+- **search.rb**, where the Search class is defined.
+- **utils.rb**, where the Utils module is defined.
 
-    ruby main.rb
-    
-    This will run the code, printing the output of our tests to the terminal. 
+The **./spec** folder contains all the relative spec tests
 
-6. To change those tests, simply open main.rb in a code editor and modify the values stored in the test_array and test_run variables.
+- **search_spec.rb**, where the tests for the Search class are defined.
+- **utils_spec.rb**, where the tests for the Utils methods are defined.
+- **spec_helper.rb**, initial file generated by the RSpec.
 
-6. Enjoy sorted arrays of data for the rest of your life.
+In addition to the above, the repo also contains .rubocop.yml for linting.
+
+## Tests
+
+1. Open Terminal
+
+2. Install RSpec on your system by running:
+
+    `gem install rspec`
+
+3. Run the tests with the command:
+
+    `rspec`
 
 ## Authors
 
@@ -58,26 +104,18 @@ To get this project up and running, you must already have ruby installed on your
 
 - Github: [@cristianCeamatu](https://github.com/cristianCeamatu)
 - Twitter: [@CeamatuV](https://twitter.com/CeamatuV)
-- Linkedin: [Ceamatu Cristian Viorel](https://www.linkedin.com/in/ceamatu-cristian-viorel-7a5469136/)
-
-👤**Muhammed Cihad Kurel**
-- Github: [@mcihadkurel](https://github.com/mcihadkurel)
-- Twitter: [@mece_ka](https://twitter.com/mece_ka)
-- LinkedIn: [@Muhammed Cihad Kurel](https://www.linkedin.com/in/muhammed-cihad-8187581a8/)
+- Linkedin: [Ceamatu Cristian](https://www.linkedin.com/in/ceamatu-cristian/)
 
 ## 🤝 Contributing
 
-The best way you can contribute to this project is by submitting an [issue](https://github.com/cristianCeamatu/microverse-bubble-sort/issues) to help us improve it!
+Our favourite contributions are those that help us improve the project, whether with a contribution, an issue, or a feature request!
+
+Feel free to check the [issues page](https://github.com/cristianCeamatu/microverse-ruby-telegram-bot/issues) to either create an issue or help us out by fixing an existing one.
 
 ## Show your support
 
-If you've read this far, you must like the project! Give us a ⭐️!
-
-## Acknowledgments
-
-- This Project was part of an assignment available on The Odin Project.
-- Our thanks to Microverse and all our peers and colleagues there.
+If you've read this far....give us a ⭐️!
 
 ## 📝 License
 
-This project has no license
+This project is licensed by Microverse and the Odin Project
