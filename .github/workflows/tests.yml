@@ -13,7 +13,7 @@ jobs:
           ruby-version: 2.6.x
       - name: Setup RSpec
         run: |
-          gem install bundler:2.1.4 && [ -f Gemfile ] && bundle --deployment
+          gem install bundler:2.1.4 && [ -f Gemfile ] && bundle config set deployment 'true'
           gem install --no-document rspec:'~>3.0'
       - name: RSpec Report
         run: rspec --force-color --format documentation
