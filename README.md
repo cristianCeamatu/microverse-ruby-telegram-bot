@@ -12,6 +12,7 @@
 
 ## The files structure of the project
 ![screenshot](.github/folder_structure.png)
+### Live version of the code: [REPL.it](https://repl.it/@cristianCeamatu/microverse-ruby-telegram-bot)
 
 ## Available commands for the master-search-bot
 
