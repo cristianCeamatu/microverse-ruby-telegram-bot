@@ -22,7 +22,7 @@
 
 ## Video Explanation
 
-Here is the [video explanation](https://www.loom.com/share/de84556995414869b6f6e127f291ac27) of this project.
+Here is the [video explanation](https://www.loom.com/share/b997a75a2bcb46f1ad2bc2a03ebe4015) of this project.
 
 ## Built With
 * Ruby
