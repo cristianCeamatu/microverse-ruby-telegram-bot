@@ -18,9 +18,9 @@
 
 1. `/start` receive a greetings message, all available commands and a funny random Gif
 2. `/stop` receive a farewell message, a nice joke and a funny random Gif
-3. `/search wiki <your query>` receive a loading message and maximum 3 Wikipedia articles related to your search query
-4. `/search wiki random` receive 3 random Wikipedia articles
-4. `/search google <your query>` receive a loading message and maximum 3 articles from the **Google Domain Websites (not a regular google search)**
+3. `search wiki <your query>` receive a loading message and maximum 3 Wikipedia articles related to your search query
+4. `search wiki random` receive 3 random Wikipedia articles
+4. `search google <your query>` receive a loading message and maximum 3 articles from the **Google Domain Websites (not a regular google search)**
 5. Writed anything else in the chat and you will be informed about the available commands and receive a random funny Gif
 
 ## Video Explanation
