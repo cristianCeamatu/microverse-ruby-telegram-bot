@@ -2,5 +2,6 @@
 require 'sinatra'
 
 get '/' do
-  'Page not found!'
+  sleep 3
+  redirect 'http://t.me/master_search_ruby_bot', 303
 end
