@@ -45,7 +45,7 @@ module Utils
     end
     response
   end
-  # rubocop: enable Metrics/CyclomaticComplexity
+  # rubocop: enable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
 
   def gif_items
     results('gif', ENV['TENOR_BASE_URI'])
