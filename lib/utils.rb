@@ -23,7 +23,7 @@ module Utils
     array[2, array.size - 1].join(' ')
   end
 
-  # rubocop: disable Metrics/CyclomaticComplexity
+  # rubocop: disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
   def results(type, uri)
     begin
       response = JSON.parse(HTTParty.get(uri).body)
