@@ -1,2 +1,2 @@
-job: ruby my_app.rb
+web: ruby my_app.rb
 worker: ruby bin/bot.rb
