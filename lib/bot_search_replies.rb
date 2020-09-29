@@ -1,7 +1,7 @@
 require_relative '../lib/search'
 
 module BotSearchReplies
-  # rubocop: disable Metrics/MethodLength, Metrics/AbcSize, Metrics/PerceivedComplexity
+  # rubocop: disable Metrics/MethodLength, Metrics/AbcSize
   def search_wiki_response(bot, message, gif)
     search = Search.new
     query = search.get_query_from_message(message.text)
@@ -57,5 +57,5 @@ module BotSearchReplies
       bot.api.send_animation(chat_id: message.chat.id, animation: gif) if gif
     end
   end
-  # rubocop: enable Metrics/MethodLength, Metrics/AbcSize, Metrics/PerceivedComplexity
+  # rubocop: enable Metrics/MethodLength, Metrics/AbcSize
 end

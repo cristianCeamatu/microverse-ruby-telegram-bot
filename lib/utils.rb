@@ -23,7 +23,7 @@ module Utils
     array[2, array.size - 1].join(' ')
   end
 
-  # rubocop: disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
+  # rubocop: disable Metrics/CyclomaticComplexity
   def results(type, uri)
     begin
       response = JSON.parse(HTTParty.get(uri).body)
@@ -45,7 +45,7 @@ module Utils
     end
     response
   end
-  # rubocop: enable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
+  # rubocop: enable Metrics/CyclomaticComplexity
 
   def gif_items
     results('gif', ENV['TENOR_BASE_URI'])

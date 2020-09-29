@@ -13,7 +13,7 @@ class Responder
     @message = options[:message]
   end
 
-  def respond
+  def respond # rubocop: disable Metrics/CyclomaticComplexity
     gif = gif_items[rand(1..10)] if gif_items
 
     case message.text
