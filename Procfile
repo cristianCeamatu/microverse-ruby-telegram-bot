@@ -1,1 +1,1 @@
-web: bundle exec ruby bin/bot.rb -p ${PORT:-3000}
+worker: bundle exec ruby bin/bot.rb
