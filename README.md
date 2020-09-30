@@ -5,7 +5,7 @@
 > In this project, I built a Telegram Bot that can search on Wikipedia/Google domains or get you 3 random Wikipedia articles. It also sends you random funny Gifs every time you write something else in the chat or you use the /start and /stop commands. The main goal is to make a massive use of external API`s by putting into practice the main concepts of Object Oriented Programming, classes, modules, objects and accessing their attributes.<br>
 > The project is built using the TDD technique.
 
-## The Bot is live, you can check him here: [Master Search Bot](http://t.me/master_search_ruby_bot)
+## The Bot is live on Heroku, you can check him here: [Master Search Bot](https://ruby-telegram-search-bot.herokuapp.com/)
 
 ## You can see a short demo of the Bot /start command in the screenshot below.
 ![image](.github/app_screenshot.png)
