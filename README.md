@@ -112,9 +112,10 @@ In addition to the above, the repo also contains .rubocop.yml for linting.
 
 👤 **Cristian Viorel Ceamatu**
 
-- Github: [@cristianCeamatu](https://github.com/cristianCeamatu)
-- Twitter: [@CeamatuV](https://twitter.com/CeamatuV)
-- Linkedin: [Ceamatu Cristian](https://www.linkedin.com/in/ceamatu-cristian/)
+- Email: [cristian.ceamatu@gmail.com](cristian.ceamatu@gmail.com)
+- Github: [https://github.com/cristianCeamatu](https://github.com/cristianCeamatu)
+- Twitter: [https://twitter.com/CristianCeamatu](https://twitter.com/CristianCeamatu)
+- Linkedin: [https://www.linkedin.com/in/ceamatu-cristian/](https://www.linkedin.com/in/ceamatu-cristian/)
 
 ## 🤝 Contributing
 
